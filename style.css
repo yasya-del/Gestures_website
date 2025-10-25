@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+  background-color: #fff;
+  color: #000;
+  max-width: 1500px;
+}
+
+header {
+  border-bottom: 1px solid #cdd7e1;
+  padding: 10px 50px;
+}
+.nav{
+  position: sticky;
+  top:0;
+}
+.nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin: 10px 0px 10px 0px;
+  padding: 0;
+}
+.nav ul li + li{
+  margin-left: 100px;
+}
+.nav li{
+  font-size: 24px;
+}
+
+.nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 700;
+}
+
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 100px 80px;
+  margin-bottom: 120px;
+}
+
+h1 {
+  font-size: 48px;
+  font-weight: 700;
+}
+
+.highlight {
+  color: #fff;
+  background-color: #b7cae8;
+  border-radius: 30px;
+  padding: 0 10px;
+}
+
+.about {
+  background-color: #eef2f8;
+  border-radius: 20px;
+  padding: 40px 50px;
+  max-width: 480px;
+}
+
+.about h2 {
+  font-size: 38px;
+  font-weight: 700;
+  border-bottom: 2px solid #839cc8;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+.about p {
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+  padding-top: 30px;
+}
+
+button {
+  background-color: #b7cae8;
+  width: 270px;
+  height: 60px;
+  color: #ffffff;
+  border: none;
+  border-radius: 15px;
+  padding: 15px 40px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #446EA7;
+}
+/* Код снизу для второй странички "Сначало главное" */
+ .main-title {
+      display: inline-block;
+      justify-content: center;
+      align-self: center;
+      background-color: #e8edf7;
+      width: 660px;
+      height: 40px;
+      padding: 10px 20px;
+      padding-bottom: 20px;
+      border-radius: 10px;
+      font-size: 38px;
+      font-weight: 600;
+      margin: 40px auto 20px;
+      display: block;
+      width: fit-content;
+    } 
+
+    
+    .steps {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 380px;
+      margin: 0 auto;
+      font-size: 1rem;
+      margin-top: 120px;
+      transform: scale(1.75);
+      margin-bottom: 300px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      position: relative;
+    }
+    /* Палочки вниз */
+    .step::before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 10px;
+      top: 88px;
+      padding-top: 15px;
+      height: 80px;
+      width: 1px;
+      background-color: #9bb3d8;
+    }
+
+    .step:last-child::before {
+      display: none;
+    }
+
+    .circle {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 2px solid #466eb6;
+      margin-right: 10px;
+      margin-top: 60px;
+      background-color: white;
+      flex-shrink: 0;
+    }
+
+    .filled {
+      background-color: #466eb6;
+    }
+
+    .step-text {
+      font-weight: 500;
+    }
+
+    .step-label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+    .step-text-pad{
+      padding-top: 50px;
+    }
+
+    /* Вход страница */
+    .login-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 80px;
+    }
+
+    .h1_txt {
+      font-size: 48px;
+      margin-bottom: 80px;
+    }
+
+    form {
+      transform: scale(1.38);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+    }
+
+    input {
+      width: 220px;
+      padding: 10px 15px;
+      border: 1px solid #e5e7eb;
+      border-radius: 20px;
+      outline: none;
+      font-size: 0.95rem;
+      color: #333;
+    }
+
+    input::placeholder {
+      color: #b3b9c4;
+    }
+
+    .button1 {
+      width: 180px;
+      height: 50px;
+      padding: 12px 0;
+      border: none;
+      border-radius: 25px;
+      background-color: #b3c5e4;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .button1:hover {
+      background-color: #446EA7;
+    }
+
+    .register-link {
+      margin-top: 50px;
+      font-size: 0.9rem;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .register-link:hover {
+      color: #446EA7;
+    }
+
+/* Страница про отличия */
+
+.title {
+      margin-top: 300px;
+      display: flex;
+      justify-content: center;
+      background-color: #f3f5fb;
+      border-radius: 12px;
+      font-size: 35px;
+      font-weight: bold;
+      margin: 40px auto 30px;
+      width: fit-content;
+      padding: 15px 25px;
+      margin-bottom: 198px;
+    }
+
+    .content {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 0 20px 60px;
+      flex-wrap: wrap;
+      transform: scale(1.4);
+    }
+
+    .box {
+      background-color: #f3f5fb;
+      border-radius: 20px;
+      padding: 25px;
+      width: 320px;
+      box-sizing: border-box;
+    }
+
+    .box h2 {
+      font-size: 18px;
+      margin-top: 0;
+      margin-bottom: 10px;
+      padding-bottom: 2px;
+      border-bottom: 2px solid #839cc8;
+    }
+
+    .box p {
+      margin: 0;
+      line-height: 1.5;
+      font-size: 15px;
+    }
+
+    /* страница с алфавитом */
+    #str-3{
+      margin-bottom: 80px;
+      margin-top: 150px;
+    }
+    .alphafit{
+      display: flex;
+      flex-direction: column;
+      justify-items: center;
+      align-items: center;
+      margin-bottom: 50px;
+    }
+  
+/* Полезные материалы */
+.columns {
+    display: flex;
+    justify-content: flex-start;
+    margin-left: 380px;
+    align-items: center;
+    flex-wrap: wrap;
+    transform: scale(1.3);
+    padding-bottom: 320px;
+  }
+  .column {
+    flex: 1 1 45%;
+    max-width: 45%;
+  }
+  .ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  .li::before {
+    content: "";
+    display: inline-block;
+    background-color: #aab8d6;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    margin-right: 12px;
+    flex-shrink: 0;
+  }
+
+  /* регистрация */
+  .button2 {
+      width: 280px;
+      height: 50px;
+      padding: 12px 0;
+      border: none;
+      border-radius: 25px;
+      background-color: #b3c5e4;
+      color: #fff;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      margin-top: 10px;
+      transition: background-color 0.2s ease;
+    }
+
+    .button2:hover {
+      background-color: #446EA7;
+    }
+    .register-link2 {
+      margin-top: 80px;
+      font-size: 0.9rem;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .register-link2:hover {
+      color: #446EA7;
+    }
+     .login-container2 {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 20px;
+    }
