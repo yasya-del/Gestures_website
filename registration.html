@@ -7,6 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <style>
+    .error{
+      color: red;
+      margin-top: 40px;
+
+    }
+  </style>
     <header>
     <nav class="nav">
       <ul>
@@ -19,15 +26,50 @@
   </header>
   <div class="login-container2">
     <h1 class="h1_txt">Регистрация</h1>
-    <form>
-      <input type="text" placeholder="логин" required />
-      <input type="text" placeholder="e-mail" required />
-      <input type="password" placeholder="пароль" required />
-      <input type="password" placeholder="подтвердить пароль" required />
-      <input type="password" placeholder="кодовое слово" required />
+    <form id="registerForm">
+      <input type="text" id="login"  placeholder="логин" required />
+      <input type="text" id="email" placeholder="e-mail" required />
+      <input type="password" id="password" placeholder="пароль" required />
+      <input type="password" id="confirm" placeholder="подтвердить пароль" required />
+      <input type="text" id="secret" placeholder="кодовое слово" required />
       <button type="submit" class="button2">Зарегистрироваться</button>
+      <p id="message" class="error"></p>
     </form>
-    <a href="registration.html" class="register-link2">Вы уже зарегестрированы? Войти</a>
+    <a href="enter.html" class="register-link2">Вы уже зарегестрированы? Войти</a>
   </div>
+  <script>
+    document.getElementById("registerForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const login = document.getElementById("login").value.trim();
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+      const message = document.getElementById("message");
+
+      // Проверка длины и наличия цифры
+      const hasNumber = /\d/.test(password);
+      if (password.length < 8 || !hasNumber) {
+        message.textContent = "Пароль должен быть не меньше 8 символов и содержать хотя бы одну цифру.";
+        return;
+      }
+
+      if (password !== confirm) {
+        message.textContent = "Пароли не совпадают.";
+        return;
+      }
+
+      // Сохраняем логин и пароль (в localStorage)
+      localStorage.setItem("login", login);
+      localStorage.setItem("password", password);
+
+      message.style.color = "green";
+      message.textContent = "Регистрация успешна!";
+
+      // Переход на страницу входа через 2 секунды
+      setTimeout(() => {
+        window.location.href = "enter.html";
+      }, 2000);
+    });
+  </script>
 </body>
 </html>

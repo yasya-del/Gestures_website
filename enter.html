@@ -6,6 +6,13 @@
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
 </head>
+<style>
+  .error{color: red;}
+  #message{
+    padding-top: 85px;
+    display: block;
+  }
+</style>
 <body>
     <header>
     <nav class="nav">
@@ -19,12 +26,50 @@
   </header>
   <div class="login-container">
     <h1 class="h1_txt">Вход</h1>
-    <form>
-      <input type="text" placeholder="логин" required />
-      <input type="password" placeholder="пароль" required />
+    <form id="loginForm">
+      <input type="text" id="login" placeholder="логин" required />
+      <input type="password" id="password" placeholder="пароль" required />
       <button type="submit" class="button1">Войти</button>
+      <p id="message" class="error"></p>
     </form>
     <a href="registration.html" class="register-link">Зарегистрироваться</a>
   </div>
+  <script>
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const enteredLogin = document.getElementById("login").value.trim();
+      const enteredPassword = document.getElementById("password").value;
+
+      // достаём сохранённые логин и пароль
+      const savedLogin = localStorage.getItem("login");
+      const savedPassword = localStorage.getItem("password");
+
+      // если ничего не сохранено
+      if (!savedLogin || !savedPassword) {
+        message.textContent = "Пользователь не найден. Зарегистрируйтесь.";
+        message.className = "error";
+        return;
+      }
+
+      // проверяем совпадение
+      if (enteredLogin === savedLogin && enteredPassword === savedPassword) {
+        message.style.color = "green";
+        message.textContent = "Вход выполнен успешно!";
+        message.className = "success";
+
+        // пример — переход на главную страницу
+        setTimeout(() => {
+          window.location.href = "doc.html"; // можно заменить на нужную страницу
+        }, 1500);
+      } else {
+        message.textContent = "Неверный логин или пароль.";
+        message.className = "error";
+      }
+    });
+  </script>
 </body>
 </html>
