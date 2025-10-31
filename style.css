@@ -373,3 +373,33 @@ button:hover {
       align-items: center;
       margin-top: 20px;
     }
+    
+    /* курсы */
+ .button-courses{
+  display: flex;
+  flex-direction: column;
+  margin-top: 75px;
+  margin-right: 300px;
+ } 
+ .button-courses a{
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 700;
+ }
+ .padding{
+  margin-bottom: 96px;
+ }
+ .row-course{
+  display: flex;
+  flex-direction: row;
+ }
+ #steps{
+  display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      margin: 0 auto;
+      font-size: 1rem;
+      margin-top: 100px;
+      transform: scale(1.6);
+      margin-bottom: 300px;
+ }
