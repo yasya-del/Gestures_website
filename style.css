@@ -96,6 +96,11 @@ button {
 button:hover {
   background-color: #446EA7;
 }
+#doc-button{
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 700;
+}
 /* Код снизу для второй странички "Сначало главное" */
  .main-title {
       display: inline-block;
