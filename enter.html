@@ -34,37 +34,26 @@
     </form>
     <a href="registration.html" class="register-link">Зарегистрироваться</a>
   </div>
-  <script>
-    const form = document.getElementById("loginForm");
-    const message = document.getElementById("message");
-
-    form.addEventListener("submit", function(e) {
+   <script>
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
       e.preventDefault();
 
-      const enteredLogin = document.getElementById("login").value.trim();
-      const enteredPassword = document.getElementById("password").value;
+      const login = document.getElementById("login").value.trim();
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
 
-      // достаём сохранённые логин и пароль
-      const savedLogin = localStorage.getItem("login");
-      const savedPassword = localStorage.getItem("password");
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+      const user = users.find(u => u.login === login && u.password === password);
 
-      // если ничего не сохранено
-      if (!savedLogin || !savedPassword) {
-        message.textContent = "Пользователь не найден. Зарегистрируйтесь.";
-        message.className = "error";
-        return;
-      }
-
-      // проверяем совпадение
-      if (enteredLogin === savedLogin && enteredPassword === savedPassword) {
+      if (user) {
         message.style.color = "green";
         message.textContent = "Вход выполнен успешно!";
         message.className = "success";
 
-        // пример — переход на главную страницу
-        setTimeout(() => {
-          window.location.href = "courses.html"; // можно заменить на нужную страницу
-        }, 1500);
+        // сохраняем текущего вошедшего пользователя
+        localStorage.setItem("currentUser", login);
+
+        setTimeout(() => window.location.href = "courses.html", 1500);
       } else {
         message.textContent = "Неверный логин или пароль.";
         message.className = "error";

@@ -46,29 +46,41 @@
       const confirm = document.getElementById("confirm").value;
       const message = document.getElementById("message");
 
-      // Проверка длины и наличия цифры
       const hasNumber = /\d/.test(password);
+
       if (password.length < 8 || !hasNumber) {
-        message.textContent = "Пароль должен быть не меньше 8 символов и содержать хотя бы одну цифру.";
+        message.textContent = "Пароль должен быть не меньше 8 символов и содержать цифру.";
+        message.className = "error";
         return;
       }
 
       if (password !== confirm) {
         message.textContent = "Пароли не совпадают.";
+        message.className = "error";
         return;
       }
 
-      // Сохраняем логин и пароль (в localStorage)
-      localStorage.setItem("login", login);
-      localStorage.setItem("password", password);
+      // получаем список пользователей (если нет — пустой массив)
+      let users = JSON.parse(localStorage.getItem("users")) || [];
 
+      // проверяем, существует ли логин
+      if (users.some(u => u.login === login)) {
+        message.textContent = "Такой логин уже зарегистрирован.";
+        message.className = "error";
+        return;
+      }
+
+      // добавляем нового пользователя
+      users.push({ login, password });
+
+      // сохраняем массив обратно
+      localStorage.setItem("users", JSON.stringify(users));
       message.style.color = "green";
       message.textContent = "Регистрация успешна!";
+      message.className = "success";
 
-      // Переход на страницу входа через 2 секунды
-      setTimeout(() => {
-        window.location.href = "enter.html";
-      }, 2000);
+      // переходим на вход
+      setTimeout(() => window.location.href = "enter.html", 1500);
     });
   </script>
 </body>
