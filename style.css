@@ -308,7 +308,7 @@ button:hover {
 .columns {
     display: flex;
     justify-content: flex-start;
-    margin-left: 380px;
+    margin-left: 340px;
     align-items: center;
     flex-wrap: wrap;
     transform: scale(1.3);
