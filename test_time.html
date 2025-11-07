@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по теме: "Местоимения"</title>
+    <title>Тест по теме: "Время"</title>
     <style>
         * {
             box-sizing: border-box;
@@ -143,7 +143,7 @@ button:hover {
 </head>
 <body>
     <div class="container">
-        <h2 class="main-title">Тест по теме: "Местоимения"</h2>
+        <h2 class="main-title">Тест по теме: "Время"</h2>
         <div id="test-container">
             <!-- Вопросы будут добавлены динамически -->
         </div>
@@ -167,57 +167,107 @@ button:hover {
         const testData = [
             {
                 id: 1,
-                image: 'жесты/знакомство/местоимения/я.jpg',
-                correctAnswer: 'я'
+                image: 'жесты/знакомство/время/вечер.jpeg',
+                correctAnswer: 'вечер'
             },
             {
                 id: 2,
-                image: 'жесты/знакомство/местоимения/мой.jpg',
-                correctAnswer: 'мой'
+                image: 'жесты/знакомство/время/четверг.jpeg',
+                correctAnswer: 'четверг'
             },
             {
                 id: 3,
-                image: 'жесты/знакомство/местоимения/мы.jpg',
-                correctAnswer: 'мы'
+                image: 'жесты/знакомство/время/воскресенье.jpeg',
+                correctAnswer: 'воскресенье'
             },
             {
                 id: 4,
-                image: 'жесты/знакомство/местоимения/ты_он.jpg',
-                correctAnswer: 'ты, он'
+                image: 'жесты/знакомство/время/час.jpeg',
+                correctAnswer: 'час'
             },
             {
                 id: 5,
-                image: 'жесты/знакомство/местоимения/все.jpg',
-                correctAnswer: 'все'
+                image: 'жесты/знакомство/время/всегда.jpeg',
+                correctAnswer: 'всегда'
             },
             {
                 id: 6,
-                image: 'жесты/знакомство/местоимения/сам.jpg',
-                correctAnswer: 'сам'
+                image: 'жесты/знакомство/время/утро.jpeg',
+                correctAnswer: 'утро'
             },
             {
                 id: 7,
-                image: 'жесты/знакомство/местоимения/твой.jpg',
-                correctAnswer: 'твой'
+                image: 'жесты/знакомство/время/вторник.jpeg',
+                correctAnswer: 'вторник'
             },
             {
                 id: 8,
-                image: 'жесты/знакомство/местоимения/другой.jpg',
-                correctAnswer: 'другой'
+                image: 'жесты/знакомство/время/суббота.jpeg',
+                correctAnswer: 'суббота'
             },
             {
                 id: 9,
-                image: 'жесты/знакомство/местоимения/любой.jpg',
-                correctAnswer: 'любой'
+                image: 'жесты/знакомство/время/вчера.jpeg',
+                correctAnswer: 'вчера'
             },
             {
                 id: 10,
-                image: 'жесты/знакомство/местоимения/каждый.jpg',
-                correctAnswer: 'каждый'
+                image: 'жесты/знакомство/время/год.jpeg',
+                correctAnswer: 'год'
             },
+            {
+                id: 11,
+                image: 'жесты/знакомство/время/сегодня.jpeg',
+                correctAnswer: 'сегодня'
+            },
+            {
+                id: 12,
+                image: 'жесты/знакомство/время/день.jpeg',
+                correctAnswer: 'день'
+            },
+            {
+                id: 13,
+                image: 'жесты/знакомство/время/пятница.jpeg',
+                correctAnswer: 'пятница'
+            },
+            {
+                id: 14,
+                image: 'жесты/знакомство/время/завтра.jpeg',
+                correctAnswer: 'завтра'
+            },
+            {
+                id: 15,
+                image: 'жесты/знакомство/время/понедельник.jpeg',
+                correctAnswer: 'понедельник'
+            },
+            {
+                id: 16,
+                image: 'жесты/знакомство/время/месяц.jpeg',
+                correctAnswer: 'месяц'
+            },
+            {
+                id: 17,
+                image: 'жесты/знакомство/время/ночь.jpeg',
+                correctAnswer: 'ночь'
+            },
+            {
+                id: 18,
+                image: 'жесты/знакомство/время/минута.jpeg',
+                correctAnswer: 'минута'
+            },
+            {
+                id: 19,
+                image: 'жесты/знакомство/время/неделя.jpeg',
+                correctAnswer: 'неделя'
+            },
+            {
+                id: 20,
+                image: 'жесты/знакомство/время/среда.jpeg',
+                correctAnswer: 'среда'
+            }
         ];
 
-        // Функция для обрезки изображения на 20px снизу
+        // Функция для обрезки изображения снизу
         function cropImageBottom(image, cropPixels = 20) {
             return new Promise((resolve, reject) => {
                 const canvas = document.createElement('canvas');
@@ -253,7 +303,7 @@ button:hover {
                 img.crossOrigin = "anonymous"; // Для работы с внешними изображениями
                 img.onload = async () => {
                     try {
-                        const croppedImg = await cropImageBottom(img, 20);
+                        const croppedImg = await cropImageBottom(img, 35);
                         resolve(croppedImg);
                     } catch (error) {
                         reject(error);
