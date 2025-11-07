@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по теме: "Местоимения"</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        .gesture-image {
+            display: block;
+            max-width: 200px;
+            margin: 0 auto 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .answer-input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+        .controls {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .results {
+            display: none;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        .result-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .correct {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+        }
+        .incorrect {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+        }
+        .score {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 20px 0;
+            color: #2c3e50;
+        }
+        .user-answer, .correct-answer {
+            font-weight: bold;
+        }
+        .user-answer.correct-answer {
+            color: #28a745;
+        }
+        .user-answer.incorrect-answer {
+            color: #dc3545;
+        }
+        .h2-ac {
+      font-size: 30px;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .h2-ac::before,
+    .h2-ac::after {
+      content: "•";
+      color: #3666cc;
+      font-size: 26px;
+    }
+        .btn a{
+      text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="main-title">Тест по теме: "Местоимения"</h2>
+        <div id="test-container">
+            <!-- Вопросы будут добавлены динамически -->
+        </div>
+
+        <div class="controls">
+            <button id="submit-btn" class="btn">Завершить</button>
+        </div>
+
+        <div id="results" class="results">
+            <h2>Результаты теста</h2>
+            <div id="score" class="score"></div>
+            <div id="answers-list"></div>
+                <div class="button-block">
+                <button class="btn"><a href="courses_1_acquaintance.html">Вернуться к курсу</a></button>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Данные теста: изображения жестов и правильные ответы
+        const testData = [
+            {
+                id: 1,
+                image: 'жесты/знакомство/местоимения_вопросы/я.jpg',
+                correctAnswer: 'я'
+            },
+            {
+                id: 2,
+                image: 'жесты/знакомство/местоимения_вопросы/мой.jpg',
+                correctAnswer: 'мой'
+            },
+            {
+                id: 3,
+                image: 'жесты/знакомство/местоимения_вопросы/мы.jpg',
+                correctAnswer: 'мы'
+            },
+            {
+                id: 4,
+                image: 'жесты/знакомство/местоимения_вопросы/ты_он.jpg',
+                correctAnswer: 'ты, он'
+            },
+            {
+                id: 5,
+                image: 'жесты/знакомство/местоимения_вопросы/все.jpg',
+                correctAnswer: 'все'
+            },
+            {
+                id: 6,
+                image: 'жесты/знакомство/местоимения_вопросы/сам.jpg',
+                correctAnswer: 'сам'
+            },
+            {
+                id: 7,
+                image: 'жесты/знакомство/местоимения_вопросы/твой.jpg',
+                correctAnswer: 'твой'
+            },
+            {
+                id: 8,
+                image: 'жесты/знакомство/местоимения_вопросы/другой.jpg',
+                correctAnswer: 'другой'
+            },
+            {
+                id: 9,
+                image: 'жесты/знакомство/местоимения_вопросы/любой.jpg',
+                correctAnswer: 'любой'
+            },
+            {
+                id: 10,
+                image: 'жесты/знакомство/местоимения_вопросы/каждый.jpg',
+                correctAnswer: 'каждый'
+            },
+        ];
+
+        // Функция для отображения вопросов
+        function renderQuestions() {
+            const testContainer = document.getElementById('test-container');
+
+            testData.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+                questionElement.innerHTML = `
+                    <h2 class="h2-ac">Вопрос ${index + 1}</h2>
+                    <h3>– Какое слово обозначает данный жест?</h3>
+                    <img src="${question.image}" alt="Жест ${index + 1}" class="gesture-image">
+                    <input type="text" class="answer-input" id="answer-${question.id}" placeholder="Введите название жеста">
+                `;
+
+                testContainer.appendChild(questionElement);
+            });
+        }
+
+        // Функция для проверки ответов и отображения результатов
+        function checkAnswers() {
+            let correctCount = 0;
+            const answersList = document.getElementById('answers-list');
+            answersList.innerHTML = '';
+
+            testData.forEach(question => {
+                const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
+                const correctAnswer = question.correctAnswer.toLowerCase();
+                const isCorrect = userAnswer === correctAnswer;
+
+                if (isCorrect) {
+                    correctCount++;
+                }
+
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                resultItem.innerHTML = `
+                    <p><strong>Вопрос ${question.id}:</strong></p>
+                    <p>Ваш ответ: <span class="user-answer ${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswer || 'Не указан'}</span></p>
+                    <p>Правильный ответ: <span class="correct-answer">${correctAnswer}</span></p>
+                `;
+
+                answersList.appendChild(resultItem);
+            });
+
+            const percentage = Math.round((correctCount / testData.length) * 100);
+            document.getElementById('score').textContent = `Правильных ответов: ${correctCount} из ${testData.length} (${percentage}%)`;
+
+            // Показываем результаты и скрываем вопросы
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('test-container').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+
+            // Прокручиваем к результатам
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Функция для возврата к курсу
+        function backToCourse() {
+            alert('Возвращаемся к курсу...');
+            // Здесь можно добавить перенаправление на страницу курса
+            // window.location.href = 'https://example.com/course';
+        }
+
+        // Инициализация теста
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuestions();
+
+            // Обработчик для кнопки завершения теста
+            document.getElementById('submit-btn').addEventListener('click', checkAnswers);
+
+            // Обработчик для кнопки возврата в курс
+            document.getElementById('back-to-course').addEventListener('click', backToCourse);
+        });
+    </script>
+</body>
+</html>
