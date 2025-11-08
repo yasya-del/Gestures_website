@@ -178,4 +178,48 @@
     <div class="button-block">
       <button class="btn"><a href="test_time.html">Пройти тест</a></button>
     </div>
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = localStorage.getItem("currentUser");
+      if (!currentUser) return;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      let user = users.find(u => u.login === currentUser);
+      if (!user) return;
+
+      // если первый тест не пройден — блокируем второй
+      const btnQuestions = document.querySelector('a[href="test_questions.html"]');
+      if (!user.progress.test_pronouns) {
+        btnQuestions.style.pointerEvents = "none";
+        btnQuestions.style.opacity = "0.5";
+        btnQuestions.textContent = "Недоступно";
+        btnQuestions.title = "Пройдите предыдущий тест";
+      }
+
+      // аналогично для других тестов
+      const btnCommunication = document.querySelector('a[href="test_communication.html"]');
+      if (!user.progress.test_questions) {
+        btnCommunication.style.pointerEvents = "none";
+        btnCommunication.style.opacity = "0.5";
+        btnCommunication.textContent = "Недоступно";
+        btnCommunication.title = "Пройдите предыдущий тест";
+      }
+
+      const btnCount = document.querySelector('a[href="test_count.html"]');
+      if (!user.progress.test_communication) {
+        btnCount.style.pointerEvents = "none";
+        btnCount.style.opacity = "0.5";
+        btnCount.textContent = "Недоступно";
+      btnCount.title = "Пройдите предыдущий тест";
+      }
+
+      const btnTime = document.querySelector('a[href="test_time.html"]');
+      if (!user.progress.test_count) {
+        btnTime.style.pointerEvents = "none";
+        btnTime.style.opacity = "0.5";
+        btnTime.textContent = "Недоступно";
+        btnTime.title = "Пройдите предыдущий тест";
+      }
+      });
+      </script>
 </body>
