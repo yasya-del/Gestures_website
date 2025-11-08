@@ -333,6 +333,14 @@ button:hover {
                 `;
 
                 answersList.appendChild(resultItem);
+                // Сохраняем прогресс пользователя
+                const currentUser = localStorage.getItem("currentUser");
+                if (currentUser) {
+                    let users = JSON.parse(localStorage.getItem("users")) || [];
+                    let user = users.find(u => u.login === currentUser);
+                    if (user) {
+                        user.progress.test_pronouns = true; // отметили, что тест пройден
+                        localStorage.setItem("users", JSON.stringify(users));}}
             });
 
             const percentage = Math.round((correctCount / testData.length) * 100);
