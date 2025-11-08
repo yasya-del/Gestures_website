@@ -71,7 +71,13 @@
       }
 
       // добавляем нового пользователя
-      users.push({ login, password });
+      users.push({ login, password,
+         progress: {
+       test_pronouns: false,
+       test_questions: false,
+       test_communication: false,
+       test_count: false,
+       test_time: false} });
 
       // сохраняем массив обратно
       localStorage.setItem("users", JSON.stringify(users));
