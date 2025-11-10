@@ -4,142 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Тест по теме: "счёт"</title>
-    <style>
-        * {
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            padding: 30px;
-        }
-        h1 {
-            text-align: center;
-            color: #2c3e50;
-            margin-bottom: 30px;
-        }
-        .question {
-            margin-bottom: 40px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid #eee;
-        }
-        .gesture-image {
-            display: block;
-            max-width: 200px;
-            margin: 0 auto 15px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .answer-input {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        .controls {
-            text-align: center;
-            margin-top: 30px;
-        }
-        .results {
-            display: none;
-            margin-top: 40px;
-            padding: 20px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-        }
-        .result-item {
-            margin-bottom: 15px;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .correct {
-            background-color: #d4edda;
-            border-left: 4px solid #28a745;
-        }
-        .incorrect {
-            background-color: #f8d7da;
-            border-left: 4px solid #dc3545;
-        }
-        .score {
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            margin: 20px 0;
-            color: #2c3e50;
-        }
-        .user-answer, .correct-answer {
-            font-weight: bold;
-        }
-        .user-answer.correct-answer {
-            color: #28a745;
-        }
-        .user-answer.incorrect-answer {
-            color: #dc3545;
-        }
-        .h2-ac {
-      font-size: 30px;
-      margin-bottom: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-
-    .h2-ac::before,
-    .h2-ac::after {
-      content: "•";
-      color: #3666cc;
-      font-size: 26px;
-    }
-        .btn a{
-      text-decoration: none;
-    color: #ffffff;
-    font-weight: 700;
-    }
-        button {
-  background-color: #b7cae8;
-  width: 270px;
-  height: 60px;
-  color: #ffffff;
-  border: none;
-  border-radius: 15px;
-  padding: 15px 40px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #446EA7;
-}
-#doc-button{
-  text-decoration: none;
-  color: #ffffff;
-  font-weight: 700;
-}
-        .main-title {
-      display: inline-block;
-      justify-content: center;
-      align-self: center;
-      background-color: #e8edf7;
-      width: 660px;
-      height: 70px;
-      padding: 10px 20px;
-      padding-bottom: 20px;
-      border-radius: 10px;
-      font-size: 38px;
-      font-weight: 600;
-      margin: 40px auto 20px;
-      display: block;
-      width: fit-content;
-    }
-    </style>
+    <link rel="stylesheet" href="style_test.css">
 </head>
 <body>
     <div class="container">
@@ -163,6 +28,7 @@ button:hover {
     </div>
 
     <script>
+        const CROP_PIXELS = 20; // Обрезать 20 пикселей снизу
         // Данные теста: изображения жестов и правильные ответы
         const testData = [
             {
@@ -266,8 +132,20 @@ button:hover {
                 correctAnswer: 'четырнадцать'
             }
         ];
+        // Функция для перемешивания массива в случайном порядке
+        function shuffleArray(array) {
+            const newArray = [...array]; // Создаем копию массива
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
 
-        // Функция для обрезки изображения снизу
+        // Переменная для хранения перемешанных вопросов
+        let shuffledQuestions = [];
+
+        // Функция для обрезки изображения на 20px снизу
         function cropImageBottom(image, cropPixels = 20) {
             return new Promise((resolve, reject) => {
                 const canvas = document.createElement('canvas');
@@ -303,7 +181,7 @@ button:hover {
                 img.crossOrigin = "anonymous"; // Для работы с внешними изображениями
                 img.onload = async () => {
                     try {
-                        const croppedImg = await cropImageBottom(img, 20);
+                        const croppedImg = await cropImageBottom(img, CROP_PIXELS);
                         resolve(croppedImg);
                     } catch (error) {
                         reject(error);
@@ -317,9 +195,13 @@ button:hover {
         // Функция для отображения вопросов с обрезанными изображениями
         async function renderQuestions() {
             const testContainer = document.getElementById('test-container');
+            testContainer.innerHTML = ''; // Очищаем контейнер
 
-            for (let i = 0; i < testData.length; i++) {
-                const question = testData[i];
+            // Перемешиваем вопросы перед отображением
+            shuffledQuestions = shuffleArray(testData);
+
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                const question = shuffledQuestions[i];
                 const questionElement = document.createElement('div');
                 questionElement.className = 'question';
 
