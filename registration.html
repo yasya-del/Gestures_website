@@ -42,19 +42,11 @@
       e.preventDefault();
 
       const login = document.getElementById("login").value.trim();
-      const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const confirm = document.getElementById("confirm").value;
       const message = document.getElementById("message");
 
       const hasNumber = /\d/.test(password);
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
-
-      if (!emailRegex.test(email)) {
-        message.textContent = "Введите корректный e-mail (например, example@mail.com)";
-        message.className = "error";
-        return;
-      }
 
       if (password.length < 8 || !hasNumber) {
         message.textContent = "Пароль должен быть не меньше 8 символов и содержать цифру.";
