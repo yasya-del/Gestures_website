@@ -247,7 +247,7 @@
             const answersList = document.getElementById('answers-list');
             answersList.innerHTML = '';
 
-            shuffledQuestions.forEach(question => {
+            shuffledQuestions.forEach((question, index) => {
                 const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
                 const correctAnswer = question.correctAnswer.toLowerCase();
                 const isCorrect = userAnswer === correctAnswer;
@@ -259,7 +259,7 @@
                 const resultItem = document.createElement('div');
                 resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 resultItem.innerHTML = `
-                    <p><strong>Вопрос ${question.id}:</strong></p>
+                    <p><strong>Вопрос ${index + 1}:</strong></p>
                     <p>Ваш ответ: <span class="user-answer ${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswer || 'Не указан'}</span></p>
                     <p>Правильный ответ: <span class="correct-answer">${correctAnswer}</span></p>
                 `;

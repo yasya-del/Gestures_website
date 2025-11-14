@@ -237,6 +237,15 @@
                         <input type="text" class="answer-input" id="answer-${question.id}" placeholder="Введите название жеста">
                     `;
                     testContainer.appendChild(questionElement);
+                    answersList.appendChild(resultItem);
+                // Сохраняем прогресс пользователя
+                const currentUser = localStorage.getItem("currentUser");
+                if (currentUser && Math.round((correctCount / testData.length) * 100) >= 75) {
+                    let users = JSON.parse(localStorage.getItem("users")) || [];
+                    let user = users.find(u => u.login === currentUser);
+                    if (user) {
+                        user.progress.test_time = true; // отметили, что тест пройден
+                        localStorage.setItem("users", JSON.stringify(users));}}
                 }
             }
         }
@@ -247,7 +256,7 @@
             const answersList = document.getElementById('answers-list');
             answersList.innerHTML = '';
 
-            shuffledQuestions.forEach(question => {
+            shuffledQuestions.forEach((question, index) => {
                 const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
                 const correctAnswer = question.correctAnswer.toLowerCase();
                 const isCorrect = userAnswer === correctAnswer;
@@ -259,7 +268,7 @@
                 const resultItem = document.createElement('div');
                 resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
                 resultItem.innerHTML = `
-                    <p><strong>Вопрос ${question.id}:</strong></p>
+                    <p><strong>Вопрос ${index + 1}:</strong></p>
                     <p>Ваш ответ: <span class="user-answer ${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswer || 'Не указан'}</span></p>
                     <p>Правильный ответ: <span class="correct-answer">${correctAnswer}</span></p>
                 `;

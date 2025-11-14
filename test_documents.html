@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по теме: "Местоимения"</title>
+    <title>Тест по теме: "Документы"</title>
     <link rel="stylesheet" href="style_test.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="main-title">Тест по теме: "Местоимения"</h2>
+        <h2 class="main-title">Тест по теме: "Документы"</h2>
         <div id="test-container">
             <!-- Вопросы будут добавлены динамически -->
         </div>
@@ -22,65 +22,105 @@
             <div id="score" class="score"></div>
             <div id="answers-list"></div>
                 <div class="button-block">
-                <button class="btn"><a href="courses_1_acquaintance.html">Вернуться к курсу</a></button>
+                <button class="btn"><a href="courses_2_family.html">Вернуться к курсу</a></button>
                 </div>
         </div>
     </div>
 
     <script>
-        const CROP_PIXELS = 20; // Обрезать 20 пикселей снизу
+        const CROP_PIXELS = 25; // Обрезать 20 пикселей снизу
         // Данные теста: изображения жестов и правильные ответы
         const testData = [
             {
                 id: 1,
-                image: 'жесты/знакомство/местоимения/я.jpg',
-                correctAnswer: 'я'
+                image: 'жесты/семья/документы/виза.jpg',
+                correctAnswer: 'виза'
             },
             {
                 id: 2,
-                image: 'жесты/знакомство/местоимения/мой.jpg',
-                correctAnswer: 'мой'
+                image: 'жесты/семья/документы/документ.jpg',
+                correctAnswer: 'документ'
             },
             {
                 id: 3,
-                image: 'жесты/знакомство/местоимения/мы.jpg',
-                correctAnswer: 'мы'
+                image: 'жесты/семья/документы/заявление.jpg',
+                correctAnswer: 'заявление'
             },
             {
                 id: 4,
-                image: 'жесты/знакомство/местоимения/ты_он.jpg',
-                correctAnswer: 'ты, он'
+                image: 'жесты/семья/документы/конверт.jpg',
+                correctAnswer: 'конверт'
             },
             {
                 id: 5,
-                image: 'жесты/знакомство/местоимения/все.jpg',
-                correctAnswer: 'все'
+                image: 'жесты/семья/документы/копия.jpg',
+                correctAnswer: 'копия'
             },
             {
                 id: 6,
-                image: 'жесты/знакомство/местоимения/сам.jpg',
-                correctAnswer: 'сам'
+                image: 'жесты/семья/документы/льготы.jpg',
+                correctAnswer: 'льготы'
             },
             {
                 id: 7,
-                image: 'жесты/знакомство/местоимения/твой.jpg',
-                correctAnswer: 'твой'
+                image: 'жесты/семья/документы/штраф.jpg',
+                correctAnswer: 'штраф'
             },
             {
                 id: 8,
-                image: 'жесты/знакомство/местоимения/другой.jpg',
-                correctAnswer: 'другой'
+                image: 'жесты/семья/документы/паспорт.jpg',
+                correctAnswer: 'паспорт'
             },
             {
                 id: 9,
-                image: 'жесты/знакомство/местоимения/любой.jpg',
-                correctAnswer: 'любой'
+                image: 'жесты/семья/документы/пенсия.jpg',
+                correctAnswer: 'пенсия'
             },
             {
                 id: 10,
-                image: 'жесты/знакомство/местоимения/каждый.jpg',
-                correctAnswer: 'каждый'
+                image: 'жесты/семья/документы/перевод.jpg',
+                correctAnswer: 'перевод'
             },
+            {
+                id: 11,
+                image: 'жесты/семья/документы/печать.jpg',
+                correctAnswer: 'печать'
+            },
+            {
+                id: 12,
+                image: 'жесты/семья/документы/письмо.jpg',
+                correctAnswer: 'письмо'
+            },
+            {
+                id: 13,
+                image: 'жесты/семья/документы/подпись.jpg',
+                correctAnswer: 'подпись'
+            },
+            {
+                id: 14,
+                image: 'жесты/семья/документы/почта.jpg',
+                correctAnswer: 'почта'
+            },
+            {
+                id: 15,
+                image: 'жесты/семья/документы/пропуск.jpg',
+                correctAnswer: 'пропуск'
+            },
+            {
+                id: 16,
+                image: 'жесты/семья/документы/регистрация.jpg',
+                correctAnswer: 'регистрация'
+            },
+            {
+                id: 17,
+                image: 'жесты/семья/документы/свидетельство.jpg',
+                correctAnswer: 'свидетельство'
+            },
+            {
+                id: 18,
+                image: 'жесты/семья/документы/справка.jpg',
+                correctAnswer: 'справка'
+            }
         ];
         // Функция для перемешивания массива в случайном порядке
         function shuffleArray(array) {
@@ -221,7 +261,7 @@
                     let users = JSON.parse(localStorage.getItem("users")) || [];
                     let user = users.find(u => u.login === currentUser);
                     if (user) {
-                        user.progress.test_pronouns = true; // отметили, что тест пройден
+                        user.progress.test_documents = true; // отметили, что тест пройден
                         localStorage.setItem("users", JSON.stringify(users));}}
             });
 

@@ -42,10 +42,29 @@
   </div>
   <div class="button-courses">
     <button class="padding"><a href="courses_1_acquaintance.html">Изучить</a></button>
-    <button class="padding"><a href="#">Недоступно</a></button>
+    <button class="padding"><a href="courses_2_family.html">Изучить</a></button>
     <button class="padding"><a href="#">Недоступно</a></button>
     <button class="padding"><a href="#">Недоступно</a></button>
   </div>
 </div>
+ <script>
+      document.addEventListener("DOMContentLoaded", () => {
+      const currentUser = localStorage.getItem("currentUser");
+      if (!currentUser) return;
+
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      let user = users.find(u => u.login === currentUser);
+      if (!user) return;
+
+      // если первый тест не пройден — блокируем второй
+      const btnQuestions = document.querySelector('a[href="courses_2_family.html"]');
+      if (!user.progress.test_pronouns || !user.progress.test_questions || !user.progress.test_time || !user.progress.test_count || !user.progress.test_communication) {
+        btnQuestions.style.pointerEvents = "none";
+        btnQuestions.style.opacity = "0.5";
+        btnQuestions.textContent = "Недоступно";
+        btnQuestions.title = "Пройдите предыдущий тест";
+      }
+
+      </script>
 </body>
 </html>
