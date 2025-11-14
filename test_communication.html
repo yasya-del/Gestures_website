@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по теме: "Время"</title>
+    <title>Тест по теме: "Общение"</title>
     <link rel="stylesheet" href="style_test.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="main-title">Тест по теме: "Время"</h2>
+        <h2 class="main-title">Тест по теме: "Общение"</h2>
         <div id="test-container">
             <!-- Вопросы будут добавлены динамически -->
         </div>
@@ -28,108 +28,98 @@
     </div>
 
     <script>
-        const CROP_PIXELS = 30; // Обрезать 20 пикселей снизу
+        const CROP_PIXELS = 40; // Обрезать 20 пикселей снизу
         // Данные теста: изображения жестов и правильные ответы
         const testData = [
             {
                 id: 1,
-                image: 'жесты/знакомство/время/вечер.jpeg',
-                correctAnswer: 'вечер'
+                image: 'жесты/знакомство/общение/глухой.jpg',
+                correctAnswer: 'глухой'
             },
             {
                 id: 2,
-                image: 'жесты/знакомство/время/четверг.jpeg',
-                correctAnswer: 'четверг'
+                image: 'жесты/знакомство/общение/ссориться.jpg',
+                correctAnswer: 'ссориться'
             },
             {
                 id: 3,
-                image: 'жесты/знакомство/время/воскресенье.jpeg',
-                correctAnswer: 'воскресенье'
+                image: 'жесты/знакомство/общение/голос.jpg',
+                correctAnswer: 'голос'
             },
             {
                 id: 4,
-                image: 'жесты/знакомство/время/час.jpeg',
-                correctAnswer: 'час'
+                image: 'жесты/знакомство/общение/спасибо.jpg',
+                correctAnswer: 'спасибо'
             },
             {
                 id: 5,
-                image: 'жесты/знакомство/время/всегда.jpeg',
-                correctAnswer: 'всегда'
+                image: 'жесты/знакомство/общение/жесты.jpg',
+                correctAnswer: 'жесты'
             },
             {
                 id: 6,
-                image: 'жесты/знакомство/время/утро.jpeg',
-                correctAnswer: 'утро'
+                image: 'жесты/знакомство/общение/сообщение.jpg',
+                correctAnswer: 'сообщение'
             },
             {
                 id: 7,
-                image: 'жесты/знакомство/время/вторник.jpeg',
-                correctAnswer: 'вторник'
+                image: 'жесты/знакомство/общение/здравствуй.jpg',
+                correctAnswer: 'здравствуй'
             },
             {
                 id: 8,
-                image: 'жесты/знакомство/время/суббота.jpeg',
-                correctAnswer: 'суббота'
+                image: 'жесты/знакомство/общение/смеяться.jpg',
+                correctAnswer: 'смеяться'
             },
             {
                 id: 9,
-                image: 'жесты/знакомство/время/вчера.jpeg',
-                correctAnswer: 'вчера'
+                image: 'жесты/знакомство/общение/объяснять.jpg',
+                correctAnswer: 'объяснять'
             },
             {
                 id: 10,
-                image: 'жесты/знакомство/время/год.jpeg',
-                correctAnswer: 'год'
+                image: 'жесты/знакомство/общение/слушать.jpg',
+                correctAnswer: 'слушать'
             },
             {
                 id: 11,
-                image: 'жесты/знакомство/время/сегодня.jpeg',
-                correctAnswer: 'сегодня'
+                image: 'жесты/знакомство/общение/показать.jpg',
+                correctAnswer: 'показать'
             },
             {
                 id: 12,
-                image: 'жесты/знакомство/время/день.jpeg',
-                correctAnswer: 'день'
+                image: 'жесты/знакомство/общение/слабослышащий.jpg',
+                correctAnswer: 'слабослышащий'
             },
             {
                 id: 13,
-                image: 'жесты/знакомство/время/пятница.jpeg',
-                correctAnswer: 'пятница'
+                image: 'жесты/знакомство/общение/понимать.jpg',
+                correctAnswer: 'понимать'
             },
             {
                 id: 14,
-                image: 'жесты/знакомство/время/завтра.jpeg',
-                correctAnswer: 'завтра'
+                image: 'жесты/знакомство/общение/рассказывать.jpg',
+                correctAnswer: 'рассказывать'
             },
             {
                 id: 15,
-                image: 'жесты/знакомство/время/понедельник.jpeg',
-                correctAnswer: 'понедельник'
+                image: 'жесты/знакомство/общение/привет.jpg',
+                correctAnswer: 'привет'
             },
             {
                 id: 16,
-                image: 'жесты/знакомство/время/месяц.jpeg',
-                correctAnswer: 'месяц'
+                image: 'жесты/знакомство/общение/разговор.jpg',
+                correctAnswer: 'разговор'
             },
             {
                 id: 17,
-                image: 'жесты/знакомство/время/ночь.jpeg',
-                correctAnswer: 'ночь'
+                image: 'жесты/знакомство/общение/прощай.jpg',
+                correctAnswer: 'прощай'
             },
             {
                 id: 18,
-                image: 'жесты/знакомство/время/минута.jpeg',
-                correctAnswer: 'минута'
-            },
-            {
-                id: 19,
-                image: 'жесты/знакомство/время/неделя.jpeg',
-                correctAnswer: 'неделя'
-            },
-            {
-                id: 20,
-                image: 'жесты/знакомство/время/среда.jpeg',
-                correctAnswer: 'среда'
+                image: 'жесты/знакомство/общение/спорить.jpg',
+                correctAnswer: 'спорить'
             }
         ];
         // Функция для перемешивания массива в случайном порядке
@@ -247,7 +237,7 @@
             const answersList = document.getElementById('answers-list');
             answersList.innerHTML = '';
 
-            testData.forEach(question => {
+            shuffledQuestions.forEach(question => {
                 const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
                 const correctAnswer = question.correctAnswer.toLowerCase();
                 const isCorrect = userAnswer === correctAnswer;
@@ -265,6 +255,14 @@
                 `;
 
                 answersList.appendChild(resultItem);
+                // Сохраняем прогресс пользователя
+                const currentUser = localStorage.getItem("currentUser");
+                if (currentUser && Math.round((correctCount / testData.length) * 100) >= 75) {
+                    let users = JSON.parse(localStorage.getItem("users")) || [];
+                    let user = users.find(u => u.login === currentUser);
+                    if (user) {
+                        user.progress.test_communication = true; // отметили, что тест пройден
+                        localStorage.setItem("users", JSON.stringify(users));}}
             });
 
             const percentage = Math.round((correctCount / testData.length) * 100);

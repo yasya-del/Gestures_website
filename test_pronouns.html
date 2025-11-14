@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по теме: "Общение"</title>
+    <title>Тест по теме: "Местоимения"</title>
     <link rel="stylesheet" href="style_test.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="main-title">Тест по теме: "Общение"</h2>
+        <h2 class="main-title">Тест по теме: "Местоимения"</h2>
         <div id="test-container">
             <!-- Вопросы будут добавлены динамически -->
         </div>
@@ -28,99 +28,59 @@
     </div>
 
     <script>
-        const CROP_PIXELS = 40; // Обрезать 20 пикселей снизу
+        const CROP_PIXELS = 20; // Обрезать 20 пикселей снизу
         // Данные теста: изображения жестов и правильные ответы
         const testData = [
             {
                 id: 1,
-                image: 'жесты/знакомство/общение/глухой.jpg',
-                correctAnswer: 'глухой'
+                image: 'жесты/знакомство/местоимения/я.jpg',
+                correctAnswer: 'я'
             },
             {
                 id: 2,
-                image: 'жесты/знакомство/общение/ссориться.jpg',
-                correctAnswer: 'ссориться'
+                image: 'жесты/знакомство/местоимения/мой.jpg',
+                correctAnswer: 'мой'
             },
             {
                 id: 3,
-                image: 'жесты/знакомство/общение/голос.jpg',
-                correctAnswer: 'голос'
+                image: 'жесты/знакомство/местоимения/мы.jpg',
+                correctAnswer: 'мы'
             },
             {
                 id: 4,
-                image: 'жесты/знакомство/общение/спасибо.jpg',
-                correctAnswer: 'спасибо'
+                image: 'жесты/знакомство/местоимения/ты_он.jpg',
+                correctAnswer: 'ты, он'
             },
             {
                 id: 5,
-                image: 'жесты/знакомство/общение/жесты.jpg',
-                correctAnswer: 'жесты'
+                image: 'жесты/знакомство/местоимения/все.jpg',
+                correctAnswer: 'все'
             },
             {
                 id: 6,
-                image: 'жесты/знакомство/общение/сообщение.jpg',
-                correctAnswer: 'сообщение'
+                image: 'жесты/знакомство/местоимения/сам.jpg',
+                correctAnswer: 'сам'
             },
             {
                 id: 7,
-                image: 'жесты/знакомство/общение/здравствуй.jpg',
-                correctAnswer: 'здравствуй'
+                image: 'жесты/знакомство/местоимения/твой.jpg',
+                correctAnswer: 'твой'
             },
             {
                 id: 8,
-                image: 'жесты/знакомство/общение/смеяться.jpg',
-                correctAnswer: 'смеяться'
+                image: 'жесты/знакомство/местоимения/другой.jpg',
+                correctAnswer: 'другой'
             },
             {
                 id: 9,
-                image: 'жесты/знакомство/общение/объяснять.jpg',
-                correctAnswer: 'объяснять'
+                image: 'жесты/знакомство/местоимения/любой.jpg',
+                correctAnswer: 'любой'
             },
             {
                 id: 10,
-                image: 'жесты/знакомство/общение/слушать.jpg',
-                correctAnswer: 'слушать'
+                image: 'жесты/знакомство/местоимения/каждый.jpg',
+                correctAnswer: 'каждый'
             },
-            {
-                id: 11,
-                image: 'жесты/знакомство/общение/показать.jpg',
-                correctAnswer: 'показать'
-            },
-            {
-                id: 12,
-                image: 'жесты/знакомство/общение/слабослышащий.jpg',
-                correctAnswer: 'слабослышащий'
-            },
-            {
-                id: 13,
-                image: 'жесты/знакомство/общение/понимать.jpg',
-                correctAnswer: 'понимать'
-            },
-            {
-                id: 14,
-                image: 'жесты/знакомство/общение/рассказывать.jpg',
-                correctAnswer: 'рассказывать'
-            },
-            {
-                id: 15,
-                image: 'жесты/знакомство/общение/привет.jpg',
-                correctAnswer: 'привет'
-            },
-            {
-                id: 16,
-                image: 'жесты/знакомство/общение/разговор.jpg',
-                correctAnswer: 'разговор'
-            },
-            {
-                id: 17,
-                image: 'жесты/знакомство/общение/прощай.jpg',
-                correctAnswer: 'прощай'
-            },
-            {
-                id: 18,
-                image: 'жесты/знакомство/общение/спорить.jpg',
-                correctAnswer: 'спорить'
-            }
         ];
         // Функция для перемешивания массива в случайном порядке
         function shuffleArray(array) {
@@ -237,7 +197,7 @@
             const answersList = document.getElementById('answers-list');
             answersList.innerHTML = '';
 
-            testData.forEach(question => {
+            shuffledQuestions.forEach(question => {
                 const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
                 const correctAnswer = question.correctAnswer.toLowerCase();
                 const isCorrect = userAnswer === correctAnswer;
@@ -257,11 +217,11 @@
                 answersList.appendChild(resultItem);
                 // Сохраняем прогресс пользователя
                 const currentUser = localStorage.getItem("currentUser");
-                if (currentUser) {
+                if (currentUser && Math.round((correctCount / testData.length) * 100) >= 75) {
                     let users = JSON.parse(localStorage.getItem("users")) || [];
                     let user = users.find(u => u.login === currentUser);
                     if (user) {
-                        user.progress.test_communication = true; // отметили, что тест пройден
+                        user.progress.test_pronouns = true; // отметили, что тест пройден
                         localStorage.setItem("users", JSON.stringify(users));}}
             });
 

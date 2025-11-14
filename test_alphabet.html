@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест по теме: "Азбука"</title>
+    <link rel="stylesheet" href="style_test.css">
+</head>
+<body>
+    <div class="container">
+        <h2 class="main-title">Тест по теме: "Азбука"</h2>
+        <div id="test-container">
+            <!-- Вопросы будут добавлены динамически -->
+        </div>
+
+        <div class="controls">
+            <button id="submit-btn" class="btn">Завершить</button>
+        </div>
+
+        <div id="results" class="results">
+            <h2>Результаты теста</h2>
+            <div id="score" class="score"></div>
+            <div id="answers-list"></div>
+                <div class="button-block">
+                <button class="btn"><a href="courses_1_acquaintance.html">Вернуться к курсу</a></button>
+                </div>
+        </div>
+    </div>
+
+    <script>
+        const CROP_PIXELS = 30; // Обрезать 20 пикселей снизу
+        // Данные теста: изображения жестов и правильные ответы
+        const testData = [
+            {
+                id: 1,
+                image: 'img/й.png',
+                correctAnswer: 'й'
+            },
+            {
+                id: 2,
+                image: 'img/ц.png',
+                correctAnswer: 'ц'
+            },
+            {
+                id: 3,
+                image: 'img/у.png',
+                correctAnswer: 'у'
+            },
+            {
+                id: 4,
+                image: 'img/к.png',
+                correctAnswer: 'к'
+            },
+            {
+                id: 5,
+                image: 'img/е.png',
+                correctAnswer: 'е'
+            },
+            {
+                id: 6,
+                image: 'img/н.png',
+                correctAnswer: 'н'
+            },
+            {
+                id: 7,
+                image: 'img/г.png',
+                correctAnswer: 'г'
+            },
+            {
+                id: 8,
+                image: 'img/ш.png',
+                correctAnswer: 'ш'
+            },
+            {
+                id: 9,
+                image: 'img/щ.png',
+                correctAnswer: 'щ'
+            },
+            {
+                id: 10,
+                image: 'img/з.png',
+                correctAnswer: 'з'
+            },
+            {
+                id: 11,
+                image: 'img/х.png',
+                correctAnswer: 'х'
+            },
+            {
+                id: 12,
+                image: 'img/ъ.png',
+                correctAnswer: 'ъ'
+            },
+            {
+                id: 13,
+                image: 'img/ф.png',
+                correctAnswer: 'ф'
+            },
+            {
+                id: 14,
+                image: 'img/ы.png',
+                correctAnswer: 'ы'
+            },
+            {
+                id: 15,
+                image: 'img/в.png',
+                correctAnswer: 'в'
+            },
+            {
+                id: 16,
+                image: 'img/а.png',
+                correctAnswer: 'а'
+            },
+            {
+                id: 17,
+                image: 'img/п.png',
+                correctAnswer: 'п'
+            },
+            {
+                id: 18,
+                image: 'img/р.png',
+                correctAnswer: 'р'
+            },
+            {
+                id: 19,
+                image: 'img/о.png',
+                correctAnswer: 'о'
+            },
+            {
+                id: 20,
+                image: 'img/л.png',
+                correctAnswer: 'л'
+            },
+            {
+                id: 21,
+                image: 'img/д.png',
+                correctAnswer: 'д'
+            },
+            {
+                id: 22,
+                image: 'img/ж.png',
+                correctAnswer: 'ж'
+            },
+            {
+                id: 23,
+                image: 'img/э.png',
+                correctAnswer: 'э'
+            },
+            {
+                id: 24,
+                image: 'img/я.png',
+                correctAnswer: 'я'
+            },
+            {
+                id: 25,
+                image: 'img/ч.png',
+                correctAnswer: 'ч'
+            },
+            {
+                id: 26,
+                image: 'img/с.png',
+                correctAnswer: 'с'
+            },
+            {
+                id: 27,
+                image: 'img/м.png',
+                correctAnswer: 'м'
+            },
+            {
+                id: 28,
+                image: 'img/и.png',
+                correctAnswer: 'и'
+            },
+            {
+                id: 29,
+                image: 'img/т.png',
+                correctAnswer: 'т'
+            },
+            {
+                id: 30,
+                image: 'img/ь.png',
+                correctAnswer: 'ь'
+            },
+            {
+                id: 31,
+                image: 'img/б.png',
+                correctAnswer: 'б'
+            },
+            {
+                id: 32,
+                image: 'img/ю.png',
+                correctAnswer: 'ю'
+            },
+            {
+                id: 33,
+                image: 'img/ё.png',
+                correctAnswer: 'ё'
+            }
+        ];
+        // Функция для перемешивания массива в случайном порядке
+        function shuffleArray(array) {
+            const newArray = [...array]; // Создаем копию массива
+            for (let i = newArray.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+            }
+            return newArray;
+        }
+
+        // Переменная для хранения перемешанных вопросов
+        let shuffledQuestions = [];
+
+        // Функция для обрезки изображения на 20px снизу
+        function cropImageBottom(image, cropPixels = 20) {
+            return new Promise((resolve, reject) => {
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+
+                // Устанавливаем размеры canvas (обрезаем снизу)
+                canvas.width = image.width;
+                canvas.height = image.height - cropPixels;
+
+                // Рисуем изображение, обрезая снизу
+                ctx.drawImage(
+                    image,
+                    0, 0,                    // начальная точка исходного изображения
+                    image.width,              // ширина исходного изображения
+                    image.height - cropPixels, // высота без нижней части
+                    0, 0,                    // начальная точка на canvas
+                    canvas.width,             // ширина на canvas
+                    canvas.height             // высота на canvas
+                );
+
+                // Создаем новое изображение с обрезанной версией
+                const croppedImage = new Image();
+                croppedImage.onload = () => resolve(croppedImage);
+                croppedImage.onerror = reject;
+                croppedImage.src = canvas.toDataURL('image/png');
+            });
+        }
+
+        // Функция для загрузки и обрезки изображения
+        async function loadAndCropImage(imageUrl) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.crossOrigin = "anonymous"; // Для работы с внешними изображениями
+                img.onload = async () => {
+                    try {
+                        const croppedImg = await cropImageBottom(img, CROP_PIXELS);
+                        resolve(croppedImg);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                img.onerror = reject;
+                img.src = imageUrl;
+            });
+        }
+
+        // Функция для отображения вопросов с обрезанными изображениями
+        async function renderQuestions() {
+            const testContainer = document.getElementById('test-container');
+            testContainer.innerHTML = ''; // Очищаем контейнер
+
+            // Перемешиваем вопросы перед отображением
+            shuffledQuestions = shuffleArray(testData);
+
+            for (let i = 0; i < shuffledQuestions.length; i++) {
+                const question = shuffledQuestions[i];
+                const questionElement = document.createElement('div');
+                questionElement.className = 'question';
+
+                try {
+                    // Загружаем и обрезаем изображение
+                    const croppedImage = await loadAndCropImage(question.image);
+                    croppedImage.alt = `Жест ${i + 1}`;
+                    croppedImage.className = 'gesture-image';
+
+                    questionElement.innerHTML = `
+                        <h3>Вопрос ${i + 1}</h3>
+                        <p>– Какое слово обозначает данный жест?</p>
+                    `;
+
+                    questionElement.appendChild(croppedImage);
+
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'answer-input';
+                    input.id = `answer-${question.id}`;
+                    input.placeholder = 'Введите название жеста';
+
+                    questionElement.appendChild(input);
+                    testContainer.appendChild(questionElement);
+
+                } catch (error) {
+                    console.error('Ошибка загрузки изображения:', error);
+                    // Если не удалось обрезать, используем оригинальное изображение
+                    questionElement.innerHTML = `
+                        <h3>Вопрос ${i + 1}</h3>
+                        <p>– Какое слово обозначает данный жест?</p>
+                        <img src="${question.image}" alt="Жест ${i + 1}" class="gesture-image">
+                        <input type="text" class="answer-input" id="answer-${question.id}" placeholder="Введите название жеста">
+                    `;
+                    testContainer.appendChild(questionElement);
+                }
+            }
+        }
+
+        // Функция для проверки ответов и отображения результатов
+        function checkAnswers() {
+            let correctCount = 0;
+            const answersList = document.getElementById('answers-list');
+            answersList.innerHTML = '';
+
+            shuffledQuestions.forEach(question => {
+                const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
+                const correctAnswer = question.correctAnswer.toLowerCase();
+                const isCorrect = userAnswer === correctAnswer;
+
+                if (isCorrect) {
+                    correctCount++;
+                }
+
+                const resultItem = document.createElement('div');
+                resultItem.className = `result-item ${isCorrect ? 'correct' : 'incorrect'}`;
+                resultItem.innerHTML = `
+                    <p><strong>Вопрос ${question.id}:</strong></p>
+                    <p>Ваш ответ: <span class="user-answer ${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswer || 'Не указан'}</span></p>
+                    <p>Правильный ответ: <span class="correct-answer">${correctAnswer}</span></p>
+                `;
+
+                answersList.appendChild(resultItem);
+            });
+
+            const percentage = Math.round((correctCount / testData.length) * 100);
+            document.getElementById('score').textContent = `Правильных ответов: ${correctCount} из ${testData.length} (${percentage}%)`;
+
+            // Показываем результаты и скрываем вопросы
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('test-container').style.display = 'none';
+            document.querySelector('.controls').style.display = 'none';
+
+            // Прокручиваем к результатам
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Функция для возврата к курсу
+        function backToCourse() {
+            alert('Возвращаемся к курсу...');
+            // Здесь можно добавить перенаправление на страницу курса
+            // window.location.href = 'https://example.com/course';
+        }
+
+        // Инициализация теста
+        document.addEventListener('DOMContentLoaded', () => {
+            renderQuestions();
+
+            // Обработчик для кнопки завершения теста
+            document.getElementById('submit-btn').addEventListener('click', checkAnswers);
+
+            // Обработчик для кнопки возврата в курс
+            document.getElementById('back-to-course').addEventListener('click', backToCourse);
+        });
+    </script>
+</body>
+</html>

@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест по теме: "Вопросы"</title>
+    <title>Тест по теме: "счёт"</title>
     <link rel="stylesheet" href="style_test.css">
 </head>
 <body>
     <div class="container">
-        <h2 class="main-title">Тест по теме: "Вопросы"</h2>
+        <h2 class="main-title">Тест по теме: "счёт"</h2>
         <div id="test-container">
             <!-- Вопросы будут добавлены динамически -->
         </div>
@@ -33,48 +33,103 @@
         const testData = [
             {
                 id: 1,
-                image: 'жесты/знакомство/вопросы/что.jpg',
-                correctAnswer: 'что'
+                image: 'жесты/знакомство/счёт/один.jpeg',
+                correctAnswer: 'один'
             },
             {
                 id: 2,
-                image: 'жесты/знакомство/вопросы/где.jpg',
-                correctAnswer: 'где'
+                image: 'жесты/знакомство/счёт/три.jpeg',
+                correctAnswer: 'три'
             },
             {
                 id: 3,
-                image: 'жесты/знакомство/вопросы/почему.jpg',
-                correctAnswer: 'почему'
+                image: 'жесты/знакомство/счёт/семнадцать.jpeg',
+                correctAnswer: 'семнадцать'
             },
             {
                 id: 4,
-                image: 'жесты/знакомство/вопросы/зачем.jpg',
-                correctAnswer: 'зачем'
+                image: 'жесты/знакомство/счёт/десять.jpeg',
+                correctAnswer: 'десять'
             },
             {
                 id: 5,
-                image: 'жесты/знакомство/вопросы/откуда.jpg',
-                correctAnswer: 'откуда'
+                image: 'жесты/знакомство/счёт/пятнадцать.jpeg',
+                correctAnswer: 'пятнадцать'
             },
             {
                 id: 6,
-                image: 'жесты/знакомство/вопросы/как.jpg',
-                correctAnswer: 'как'
+                image: 'жесты/знакомство/счёт/семь.jpeg',
+                correctAnswer: 'семь'
             },
             {
                 id: 7,
-                image: 'жесты/знакомство/вопросы/куда.jpg',
-                correctAnswer: 'куда'
+                image: 'жесты/знакомство/счёт/два.jpeg',
+                correctAnswer: 'два'
             },
             {
                 id: 8,
-                image: 'жесты/знакомство/вопросы/когда.jpg',
-                correctAnswer: 'когда'
+                image: 'жесты/знакомство/счёт/восемь.jpeg',
+                correctAnswer: 'восемь'
             },
             {
                 id: 9,
-                image: 'жесты/знакомство/вопросы/кто.jpg',
-                correctAnswer: 'кто'
+                image: 'жесты/знакомство/счёт/девятнадцать.jpeg',
+                correctAnswer: 'девятнадцать'
+            },
+            {
+                id: 10,
+                image: 'жесты/знакомство/счёт/девять.jpeg',
+                correctAnswer: 'девять'
+            },
+            {
+                id: 11,
+                image: 'жесты/знакомство/счёт/одиннадцать.jpeg',
+                correctAnswer: 'одиннадцать'
+            },
+            {
+                id: 12,
+                image: 'жесты/знакомство/счёт/восемнадцать.jpeg',
+                correctAnswer: 'восемнадцать'
+            },
+            {
+                id: 13,
+                image: 'жесты/знакомство/счёт/четыре.jpeg',
+                correctAnswer: 'четыре'
+            },
+            {
+                id: 14,
+                image: 'жесты/знакомство/счёт/двадцать.jpeg',
+                correctAnswer: 'двадцать'
+            },
+            {
+                id: 15,
+                image: 'жесты/знакомство/счёт/двенадцать.jpeg',
+                correctAnswer: 'двенадцать'
+            },
+            {
+                id: 16,
+                image: 'жесты/знакомство/счёт/шесть.jpeg',
+                correctAnswer: 'шесть'
+            },
+            {
+                id: 17,
+                image: 'жесты/знакомство/счёт/шестнадцать.jpeg',
+                correctAnswer: 'шестнадцать'
+            },
+            {
+                id: 18,
+                image: 'жесты/знакомство/счёт/тринадцать.jpeg',
+                correctAnswer: 'тринадцать'
+            },
+            {
+                id: 19,
+                image: 'жесты/знакомство/счёт/пять.jpeg',
+                correctAnswer: 'пять'
+            },
+            {
+                id: 20,
+                image: 'жесты/знакомство/счёт/четырнадцать.jpeg',
+                correctAnswer: 'четырнадцать'
             }
         ];
         // Функция для перемешивания массива в случайном порядке
@@ -192,7 +247,7 @@
             const answersList = document.getElementById('answers-list');
             answersList.innerHTML = '';
 
-            testData.forEach(question => {
+            shuffledQuestions.forEach(question => {
                 const userAnswer = document.getElementById(`answer-${question.id}`).value.trim().toLowerCase();
                 const correctAnswer = question.correctAnswer.toLowerCase();
                 const isCorrect = userAnswer === correctAnswer;
@@ -212,11 +267,11 @@
                 answersList.appendChild(resultItem);
                 // Сохраняем прогресс пользователя
                 const currentUser = localStorage.getItem("currentUser");
-                if (currentUser) {
+                if (currentUser && Math.round((correctCount / testData.length) * 100) >= 75) {
                     let users = JSON.parse(localStorage.getItem("users")) || [];
                     let user = users.find(u => u.login === currentUser);
                     if (user) {
-                        user.progress.test_questions = true; // отметили, что тест пройден
+                        user.progress.test_count = true; // отметили, что тест пройден
                         localStorage.setItem("users", JSON.stringify(users));}}
             });
 
