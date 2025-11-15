@@ -46,10 +46,17 @@
       const email = document.getElementById("email").value.trim();
       const password = document.getElementById("password").value;
       const confirm = document.getElementById("confirm").value;
+      const secret = document.getElementById("secret").value.trim()
       const message = document.getElementById("message");
 
       const hasNumber = /\d/.test(password);
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/; 
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (secret.length === 0) {
+                message.textContent = "Пожалуйста, введите кодовое слово для восстановления пароля.";
+                message.className = "error";
+                return;
+            }
 
       if (!emailRegex.test(email)) {
         message.textContent = "Введите корректный e-mail (например, example@mail.com)";
@@ -80,16 +87,22 @@
       }
 
       // добавляем нового пользователя
-      users.push({ login, password,
-         progress: {
-       test_pronouns: false,
-       test_questions: false,
-       test_communication: false,
-       test_count: false,
-       test_time: false,
-       test_family: false,
-       test_documents: false,
-       test_feels: false} });
+      users.push({
+                login: login,
+                password: password,
+                secret: secret, // Сохраняем кодовое слово
+                progress: {
+                    test_pronouns: false,
+                    test_questions: false,
+                    test_communication: false,
+                    test_count: false,
+                    test_time: false,
+                    test_family: false,
+                    test_documents: false,
+                    test_feels: false
+                },
+                registeredAt: new Date().toISOString()
+            });
 
       // сохраняем массив обратно
       localStorage.setItem("users", JSON.stringify(users));
